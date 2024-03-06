@@ -1,13 +1,13 @@
 import { Link } from "react-router-dom"
 import Search from "../../assets/icons/search.svg"
 import Logo from "../../assets/logo.svg"
+import { useAuth } from "../../hooks/useAuth"
 import useModal from "../../hooks/useModal"
+import Logout from "../auth/Logout"
 const Header = () => {
   const { openModal } = useModal()
-  const handleOpen = () => {
-    openModal()
-    console.log("open")
-  }
+  const { auth } = useAuth()
+  console.log("🚀 ~ Header ~ auth:", auth)
   return (
     <header>
       <nav className="container">
@@ -38,15 +38,19 @@ const Header = () => {
                 <span>Search</span>
               </Link>
             </li>
-            <li>
-              <Link
-                to="/login"
-                className="text-white/50 hover:text-white transition-all duration-200"
-              >
-                {" "}
-                Login{" "}
-              </Link>
-            </li>
+            {auth?.authToken ? (
+              <Logout />
+            ) : (
+              <li>
+                <Link
+                  to="/login"
+                  className="text-white/50 hover:text-white transition-all duration-200"
+                >
+                  {" "}
+                  Login{" "}
+                </Link>
+              </li>
+            )}
             <li className="flex items-center">
               {/* <!-- Circular Div with background color --> */}
               <div className="avater-img bg-orange-600 text-white">

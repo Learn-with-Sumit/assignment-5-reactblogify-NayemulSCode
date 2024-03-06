@@ -16,7 +16,7 @@ function App() {
       <Header />
       <Routes>
         <Route element={<HomePage />} path="/" exact />
-        <Route element={<RegistrationPage />} path="/registration" />
+        <Route element={<RegistrationPage />} path="/register" />
         <Route element={<LoginPage />} path="/login" />
         <Route element={<NotFoundPage />} path="*" />
       </Routes>

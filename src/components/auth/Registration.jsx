@@ -1,8 +1,10 @@
+import axios from "axios"
 import { useForm } from "react-hook-form"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { passwordRegex } from "../../utils/passwordRegx"
 import Field from "../common/Field"
-
 const Registration = () => {
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -10,7 +12,22 @@ const Registration = () => {
     setError,
   } = useForm()
   const onSubmit = async (formData) => {
-    console.log("data", formData)
+    try {
+      let response = await axios.post(
+        `${import.meta.env.VITE_SERVER_BASE_URL}/auth/register`,
+        formData
+      )
+
+      if (response.status === 201) {
+        navigate("/login")
+      }
+    } catch (error) {
+      console.error(error)
+      setError("root.random", {
+        type: "random",
+        message: `Something went wrong: ${error.message}`,
+      })
+    }
   }
   return (
     <form onSubmit={handleSubmit(onSubmit)} autoComplete="off">
@@ -72,6 +89,15 @@ const Registration = () => {
           <input
             {...register("password", {
               required: "Password is Required",
+              pattern: {
+                value: passwordRegex,
+                message:
+                  "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+              },
+              minLength: {
+                value: 8,
+                message: "Password must be at least 8 characters",
+              },
             })}
             type="password"
             id="password"
