@@ -6,6 +6,7 @@ const Logout = () => {
   const { setAuth } = useAuth()
   const handleLogout = () => {
     setAuth({})
+    localStorage.clear()
     navigate("/login")
   }
 

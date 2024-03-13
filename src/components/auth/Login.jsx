@@ -1,8 +1,8 @@
 import axios from "axios"
+import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../hooks/useAuth"
-import { passwordRegex } from "../../utils/passwordRegx"
 import Field from "../common/Field"
 
 const Login = () => {
@@ -14,6 +14,11 @@ const Login = () => {
     formState: { errors },
     setError,
   } = useForm()
+  useEffect(() => {
+    const getAuth = localStorage.getItem("auth")
+    console.log("🚀 ~ useEffect ~ getAuth:", JSON.parse(getAuth))
+    setAuth(JSON.parse(getAuth))
+  }, [])
   const onSubmit = async (formData) => {
     try {
       const response = await axios.post(
@@ -29,7 +34,10 @@ const Login = () => {
 
           console.log(`Login time auth token: ${authToken}`)
           setAuth({ user, authToken, refreshToken })
-
+          localStorage.setItem(
+            "auth",
+            JSON.stringify({ user, authToken, refreshToken })
+          )
           navigate("/")
         }
       }
@@ -68,11 +76,11 @@ const Login = () => {
           <input
             {...register("password", {
               required: "Password is Required",
-              pattern: {
-                value: passwordRegex,
-                message:
-                  "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
-              },
+              // pattern: {
+              //   value: passwordRegex,
+              //   message:
+              //     "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+              // },
               minLength: {
                 value: 8,
                 message: "Password must be at least 8 characters",

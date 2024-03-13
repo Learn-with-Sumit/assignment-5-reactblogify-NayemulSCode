@@ -2,6 +2,7 @@
   "tabWidth": 2,
   "useTabs": false,
   "singleQuote": false,
+  "doubleQuote": true,
   "semi": false,
   "quoteProps": "consistent"
 }

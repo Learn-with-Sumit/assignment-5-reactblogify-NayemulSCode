@@ -1,5 +1,7 @@
 import { createContext } from "react"
 const ModalContext = createContext()
 const AuthContext = createContext()
+const ProfileContext = createContext()
+const BlogContext = createContext()
 
-export { AuthContext, ModalContext }
+export { AuthContext, BlogContext, ModalContext, ProfileContext }
