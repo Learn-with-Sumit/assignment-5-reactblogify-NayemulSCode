@@ -3,8 +3,8 @@ import { useEffect } from "react"
 import { useForm } from "react-hook-form"
 import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../hooks/useAuth"
+import { passwordRegex } from "../../utils/passwordRegx"
 import Field from "../common/Field"
-
 const Login = () => {
   const { setAuth } = useAuth()
   const navigate = useNavigate()
@@ -16,7 +16,6 @@ const Login = () => {
   } = useForm()
   useEffect(() => {
     const getAuth = localStorage.getItem("auth")
-    console.log("🚀 ~ useEffect ~ getAuth:", JSON.parse(getAuth))
     setAuth(JSON.parse(getAuth))
   }, [])
   const onSubmit = async (formData) => {
@@ -76,11 +75,11 @@ const Login = () => {
           <input
             {...register("password", {
               required: "Password is Required",
-              // pattern: {
-              //   value: passwordRegex,
-              //   message:
-              //     "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
-              // },
+              pattern: {
+                value: passwordRegex,
+                message:
+                  "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character.",
+              },
               minLength: {
                 value: 8,
                 message: "Password must be at least 8 characters",
