@@ -2,7 +2,7 @@ import { useEffect } from "react"
 import { actions } from "../actions"
 import BlogList from "../components/blogs/BlogList"
 import SideBar from "../components/home/SideBar"
-import useAxios from "../hooks/useAxios"
+import useAxios from "../hooks/useAxios.js"
 import { useBlog } from "../hooks/useBlog"
 
 const HomePage = () => {
