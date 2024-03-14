@@ -7,12 +7,8 @@ import Logout from "../auth/Logout"
 const Header = () => {
   const { openModal } = useModal()
   const { auth } = useAuth()
-  // const { state } = useProfile()
-  // const user = state?.user ?? auth?.user
-  const user = auth?.user
-  // console.log("🚀 ~ Header ~ user:", user)
 
-  console.log("🚀 ~ Header ~ auth:", auth)
+  const user = auth?.user
   return (
     <header>
       <nav className="container">

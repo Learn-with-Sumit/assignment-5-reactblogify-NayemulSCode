@@ -1,10 +1,8 @@
-import React from "react"
 import BlogHeader from "./BlogHeader"
 import BlogMetadata from "./BlogMetadata"
 import BlogShortDescription from "./BlogShortDescription"
 
 const BlogCard = ({ blog }) => {
-  console.log("🚀 ~ BlogCard ~ blog:", blog)
   return (
     <div className="blog-card">
       <img
